@@ -28,12 +28,12 @@ def chat(query):
     try:
         # Generate response using the correct method
         response = genai.generate(
-            prompt=chatStr,                 # Pass the chat history as the prompt
-            **generation_config             # Use the generation config
+            prompt=chatStr,
+            **generation_config
         )
 
         # Extract response text
-        reply = response.generations[0].text  # Fetch the first generation's text
+        reply = response.generations[0].text
         say(reply)
         chatStr += f"{reply}\n"
         return reply
@@ -102,9 +102,9 @@ def tell_joke():
     say(joke)
     print(joke)
 
-
-def generate_email():
-    """Function to generate email using generative AI."""
+def generate_email(query):
+    """Function to generate email based on the user's query."""
+    # Dynamic query passed by the user for generating an email
     model = genai.GenerativeModel(
         model_name="gemini-1.5-flash",
         generation_config=generation_config,
@@ -114,20 +114,13 @@ def generate_email():
             {
                 "role": "user",
                 "parts": [
-                    "write a formal email to a professor regarding project progress.",
+                    f"Write an email based on the following: {query}",
                 ],
             },
         ]
     )
 
-    # Input message details for the email
-    input_details = (
-        "I am writing to Professor to request a meeting regarding the project progress. "
-        "I am available on Monday and Wednesday afternoons. "
-        "The tone should be formal."
-    )
-
-    response = chat_session.send_message(input_details)
+    response = chat_session.send_message(query)
     say("Here is the email content that I have generated.")
     print(response.text)
     return response.text
@@ -158,7 +151,7 @@ if __name__ == "__main__":
             continue
 
         if "email" in query.lower():
-            email_content = generate_email()
+            email_content = generate_email(query)  # query ko pass karein
             print("Generated Email Content:")
             print(email_content)
             continue
