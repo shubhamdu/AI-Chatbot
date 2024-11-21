@@ -23,7 +23,7 @@ def chat(query):
     """Chat using Gemini API."""
     global chatStr
     print(chatStr)
-    chatStr += f"Shubham: {query}\n Gemini: "
+    chatStr += f"Shubham: {query}\n Alexa: "
 
     try:
 
@@ -127,7 +127,7 @@ def generate_email(query):
 
 
 if __name__ == "__main__":
-    say("Hello, I am Gemini. How can I help you?")
+    say("Hello, I am Alexa. How can I help you?")
     sites = [
         ["YouTube", "https://youtube.com"],
         ["Twitter", "https://x.com"],
