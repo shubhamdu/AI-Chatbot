@@ -7,7 +7,7 @@ import openai
 import google.generativeai as genai
 from config import apikey
 
-# Configure API keys
+
 genai.configure(api_key=apikey)
 
 chatStr = ""
@@ -23,16 +23,16 @@ def chat(query):
     """Chat using Gemini API."""
     global chatStr
     print(chatStr)
-    chatStr += f"Shubham: {query}\n Shivam: "
+    chatStr += f"Shubham: {query}\n Alexa: "
 
     try:
-        # Generate response using the correct method
+
         response = genai.generate(
             prompt=chatStr,
             **generation_config
         )
 
-        # Extract response text
+
         reply = response.generations[0].text
         say(reply)
         chatStr += f"{reply}\n"
@@ -43,9 +43,9 @@ def chat(query):
         return "Sorry, I couldn't process that."
 
 def say(text):
-    """Function to convert text to speech."""
+
     try:
-        if os.name == 'nt':  # For Windows
+        if os.name == 'nt':
             import pyttsx3
             engine = pyttsx3.init()
             engine.say(text)
@@ -104,7 +104,7 @@ def tell_joke():
 
 def generate_email(query):
     """Function to generate email based on the user's query."""
-    # Dynamic query passed by the user for generating an email
+
     model = genai.GenerativeModel(
         model_name="gemini-1.5-flash",
         generation_config=generation_config,
@@ -151,12 +151,16 @@ if __name__ == "__main__":
             continue
 
         if "email" in query.lower():
-            email_content = generate_email(query)  # query ko pass karein
+            email_content = generate_email(query)
             print("Generated Email Content:")
             print(email_content)
             continue
 
-        # Exit the program
+        if "open music" in query:
+            musicPath = "/Users/shubhamchaurasia/Downloads/downfall.mp3"
+            os.system(f"open {musicPath}")
+
+
         if "exit" in query.lower() or "quit" in query.lower():
             say("Goodbye! Have a nice day.")
             break
