@@ -65,10 +65,15 @@ Project Structure:
 Commands List :
 
 "Open <website>" = Opens popular websites (YouTube, Google).
+
 "Time" = Reports the current time.
+
 "Joke" = Tells a random joke.
+
 "Email <content>"	= Generates an email based on input.
+
 "Open Music" = Plays a pre-defined music file.
+
 "Exit" or "Quit" = Exits the assistant.
 
 Contributing:
